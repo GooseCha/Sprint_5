@@ -1,7 +1,7 @@
 import pytest
-import random as r
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from helpers import generate_unique_email
 
 
 @pytest.fixture
@@ -18,10 +18,10 @@ def driver():
     chrome_options.add_experimental_option("prefs", prefs)
 
     driver = webdriver.Chrome(options=chrome_options)
-    return driver
+    yield driver
+    driver.quit()
 
 
 @pytest.fixture
 def email():
-    email = str(r.randint(100, 999999999)) + "@mail.ru"
-    return email
+    return generate_unique_email()
