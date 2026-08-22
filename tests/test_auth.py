@@ -7,7 +7,7 @@ from config import BASE_URL
 
 
 class TestRegistraion:
-    def test_registration_user_success(driver, email):
+    def test_registration_user_success(self, driver, email):
         driver.get(BASE_URL)
         driver.find_element(*Main.LOGIN_AND_REGISTRATION_BUTTON).click()
         WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable(Auth.DONT_HAVE_ACCOUNT_BUTTON))
@@ -21,7 +21,7 @@ class TestRegistraion:
         assert driver.find_element(*Main.USER_AVATAR).is_displayed(), "Отсутствует аватар на странице"
 
     @pytest.mark.parametrize("wrong_email", ["testmail.ru", "test@mail", "test@.ru", "@mail.ru", "test test@mail.ru", ""])
-    def test_registration_with_wrong_email_error(driver, wrong_email):
+    def test_registration_with_wrong_email_error(self, driver, wrong_email):
         driver.get(BASE_URL)
         driver.find_element(*Main.LOGIN_AND_REGISTRATION_BUTTON).click()
         WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable(Auth.DONT_HAVE_ACCOUNT_BUTTON))
@@ -36,7 +36,7 @@ class TestRegistraion:
         assert "rgb(255, 105, 114)" in driver.find_element(*Auth.PASSWORD_CONTAINER).value_of_css_property("border"), "Поле password не имеет красной рамки"
         assert "rgb(255, 105, 114)" in driver.find_element(*Auth.CONFIRM_PASSWORD_CONTAINER).value_of_css_property("border"), "Поле confrim_password не имеет красной рамки"
 
-    def test_registarion_with_already_registrated_user_error(driver):
+    def test_registarion_with_already_registrated_user_error(self, driver):
         driver.get(BASE_URL)
         driver.find_element(*Main.LOGIN_AND_REGISTRATION_BUTTON).click()
         WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable(Auth.DONT_HAVE_ACCOUNT_BUTTON))
@@ -53,7 +53,7 @@ class TestRegistraion:
 
 
 class TestAuth:
-    def test_user_login_success(driver):
+    def test_user_login_success(self, driver):
         driver.get(BASE_URL)
         driver.find_element(*Main.LOGIN_AND_REGISTRATION_BUTTON).click()
         WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable(Auth.DONT_HAVE_ACCOUNT_BUTTON))
@@ -64,7 +64,7 @@ class TestAuth:
         assert driver.find_element(*Main.USER_NAME).text == "User.", "отсутствует имя User на странице "
         assert driver.find_element(*Main.USER_AVATAR).is_displayed(), "Отсутствует аватар на странице"
 
-    def test_user_logout_success(driver):
+    def test_user_logout_success(self, driver):
         driver.get(BASE_URL)
         driver.find_element(*Main.LOGIN_AND_REGISTRATION_BUTTON).click()
         WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable(Auth.DONT_HAVE_ACCOUNT_BUTTON))
@@ -73,7 +73,7 @@ class TestAuth:
         driver.find_element(*Auth.LOGIN_BUTTON).click()
         WebDriverWait(driver, 3).until(expected_conditions.visibility_of_element_located(Main.USER_NAME))
         driver.find_element(*Auth.LOGOUT_BUTTON).click()
-        WebDriverWait(driver, 3).until(expected_conditions.visibility_of_element_located(Auth.LOGIN_AND_REGISTRATION_BUTTON))
-        assert driver.find_element(*Auth.LOGIN_AND_REGISTRATION_BUTTON), 'отсутствует кнопка "Вход и регистрация" '
+        WebDriverWait(driver, 3).until(expected_conditions.visibility_of_element_located(Main.LOGIN_AND_REGISTRATION_BUTTON))
+        assert driver.find_element(*Main.LOGIN_AND_REGISTRATION_BUTTON), 'отсутствует кнопка "Вход и регистрация" '
         assert len(driver.find_elements(*Main.USER_NAME)) == 0, "На странице присутсвует имя User"
         assert len(driver.find_elements(*Main.USER_AVATAR)) == 0, "На странице присутсвует аватар"

@@ -25,7 +25,7 @@ class MainPageLocators:
 
 
 class AdPageLocators:
-    AD_FORM_REGISTRATION_TEXT = (By.CLASS_NAME, "popUp_shell__LuyqR")
+    AD_FORM_REGISTRATION = (By.CLASS_NAME, "popUp_shell__LuyqR")
     AD_FORM_REGISTRATION_TEXT = (By.XPATH, "//form/div/h1")
     AD_FORM = (By.CLASS_NAME, "createListingPage_createListingPageStyle__U-MJJ")
     AD_NAME = (By.NAME, "name")
@@ -39,3 +39,4 @@ class AdPageLocators:
     AD_SUBMIT_BUTTON = (By.XPATH, "//button[text()='Опубликовать']")
     MY_ADS = (By.XPATH, "//div[@class='card']")
     MY_PROFILE = (By.CLASS_NAME, "circleLarge")
+    AD_CARDS_TITLES = (By.XPATH, "//div[@class='card']//h2[@class='h2']")

@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from helpers import generate_unique_email
+from helpers import generate_email
 
 
 @pytest.fixture
@@ -24,4 +24,4 @@ def driver():
 
 @pytest.fixture
 def email():
-    return generate_unique_email()
+    return generate_email()
